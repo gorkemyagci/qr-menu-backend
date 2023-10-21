@@ -11,7 +11,7 @@ const fileUpload = require('express-fileupload');
 const app = express();
 const port = 3001;
 
-mongoose.connect('mongodb+srv://gorkemyagci705:35gorkem35@cluster0.get8xcl.mongodb.net/qr-menu-db?retryWrites=true&w=majority', { useNewUrlParser: true, useUnifiedTopology: true });
+mongoose.connect(process.env.MONGODB_CONNECT_URI, { useNewUrlParser: true, useUnifiedTopology: true });
 
 let allowCrossDomain = function (req, res, next) {
     res.header('Access-Control-Allow-Origin', '*');
@@ -32,7 +32,7 @@ app.use(fileUpload({
     tempFileDir: '/tmp/',
 }));
 app.use(session({
-    store: MongoStore.create({ mongoUrl: 'mongodb+srv://gorkemyagci705:35gorkem35@cluster0.get8xcl.mongodb.net/qr-menu-db?retryWrites=true&w=majority' }),
+    store: MongoStore.create({ mongoUrl: process.env.MONGODB_CONNECT_URI }),
     secret: 'my_secret_key',
     resave: false,
     saveUninitialized: true,
