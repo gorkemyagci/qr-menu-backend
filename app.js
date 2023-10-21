@@ -39,7 +39,8 @@ app.use(session({
 app.use(allowCrossDomain);
 app.use(express.json({ limit: '50mb' }));
 app.use(cors({
-    origin: 'http://localhost:3000',
+    // all origins
+    origin: '*',
     methods: 'GET,PUT,POST,DELETE',
     allowedHeaders: 'Content-Type',
 }));
