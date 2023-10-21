@@ -11,7 +11,12 @@ const fileUpload = require('express-fileupload');
 const app = express();
 const port = 3001;
 
-mongoose.connect(process.env.MONGODB_CONNECT_URI);
+mongoose.connect(process.env.MONGODB_CONNECT_URI)
+.then(() => {
+    console.log('Connected to MongoDB');
+}).catch(error => {
+    console.log(error);
+});
 
 let allowCrossDomain = function (req, res, next) {
     res.header('Access-Control-Allow-Origin', '*');
