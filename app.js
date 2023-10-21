@@ -11,7 +11,7 @@ const fileUpload = require('express-fileupload');
 const app = express();
 const port = 3001;
 
-mongoose.connect(process.env.MONGODB_CONNECT_URI, { useNewUrlParser: true, useUnifiedTopology: true });
+mongoose.connect(process.env.MONGODB_CONNECT_URI);
 
 let allowCrossDomain = function (req, res, next) {
     res.header('Access-Control-Allow-Origin', '*');
@@ -31,12 +31,6 @@ app.use(fileUpload({
     useTempFiles: true,
     tempFileDir: '/tmp/',
 }));
-app.use(session({
-    store: MongoStore.create({ mongoUrl: process.env.MONGODB_CONNECT_URI }),
-    secret: 'my_secret_key',
-    resave: false,
-    saveUninitialized: true,
-}))
 
 app.use('/users', userRoute);
 app.use('/categories', categoryRoute);
