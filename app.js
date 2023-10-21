@@ -12,11 +12,11 @@ const app = express();
 const port = 3001;
 
 mongoose.connect(process.env.MONGODB_CONNECT_URI)
-.then(() => {
-    console.log('Connected to MongoDB');
-}).catch(error => {
-    console.log(error);
-});
+    .then(() => {
+        console.log('Connected to MongoDB');
+    }).catch(error => {
+        console.log(error);
+    });
 
 let allowCrossDomain = function (req, res, next) {
     res.header('Access-Control-Allow-Origin', '*');
@@ -37,6 +37,9 @@ app.use(fileUpload({
     tempFileDir: '/tmp/',
 }));
 
+app.get('/', (req, res) => {
+    res.send('Hello World!');
+});
 app.use('/users', userRoute);
 app.use('/categories', categoryRoute);
 app.use('/products', productRoute);
