@@ -34,8 +34,7 @@ exports.createProduct = async (req, res) => {
 
 exports.updateProduct = async (req, res) => {
     try {
-        const { name, price, categoryID } = req.body;
-        const image = req.file.filename;
+        const { name, price, image, categoryID } = req.body;
         const product = await Product.findByIdAndUpdate(req.params.id, { name: name, price: price, image: image, categoryID: categoryID });
         res.status(200).json({ message: 'Product updated', product: product });
     } catch (error) {
