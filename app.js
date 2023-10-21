@@ -28,19 +28,14 @@ let allowCrossDomain = function (req, res, next) {
     next();
 };
 
-// app.use(session({
-//     secret: process.env.JWT_SECRET,
-//     resave: false,
-//     saveUninitialized: false,
-//     store: MongoStore.create({
-//         mongoUrl: process.env.MONGODB_CONNECT_URI,
-//         collectionName: 'sessions',
-//         ttl: 60 * 60 * 24 * 7,
-//     }),
-//     cookie: {
-//         maxAge: 1000 * 60 * 60 * 24 * 7,
-//     },
-// }));
+app.use(session({
+    secret: process.env.JWT_SECRET,
+    resave: false,
+    saveUninitialized: false,
+    store: MongoStore.create({
+        mongoUrl: process.env.MONGODB_CONNECT_URI,
+    }),
+}));
 app.use(allowCrossDomain);
 app.use(express.json({ limit: '50mb' }));
 app.use(cors({
