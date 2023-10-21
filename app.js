@@ -43,5 +43,5 @@ app.use('/categories', categoryRoute);
 app.use('/products', productRoute);
 
 app.listen(port, () => {
-    console.log(`Server running on port ${port}`);
+    console.log(`Server running on port ${MONGODB_CONNECT_URI}`);
 });
